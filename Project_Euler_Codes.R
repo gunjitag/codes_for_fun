@@ -135,8 +135,7 @@ x <- ceiling(x/20)*20
 vec_check <- seq(11,20)
 
 repeat {
-  vec_num <- rep(x, times=10)
-  check <- max(vec_num%%vec_check)
+  check <- max(x%%vec_check)
   if(check == 0) {
     print(x)
     break
