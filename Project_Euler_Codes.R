@@ -176,4 +176,43 @@ square_of_sum <- sum_vec*sum_vec
 diff <- square_of_sum - sum_of_squares
 
 
+####################################################################################################
+# Problem 7: Special Pythogorean Triplet
+# A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
+# a^2 + b^2 = c^2
+# For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
+# There exists exactly one Pythagorean triplet for which a + b + c = 1000.
+# Find the product abc.
+####################################################################################################
+#Clear the environment 
+rm(list = ls())
+
+#brute force to find pythogorean triplets
+
+upper_limit <- 1000
+
+pythogorean_a <- c()
+pythogorean_b <- c()
+pythogorean_c <- c()
+
+
+for(a in 1:upper_limit) {
+  for(b in a:upper_limit) {
+    c_sqr <- a^2 + b^2
+    c <- sqrt(c_sqr)
+    if(c %% 1 == 0) {
+      pythogorean_a <- append(pythogorean_a, a)
+      pythogorean_b <- append(pythogorean_b, b)
+      pythogorean_c <- append(pythogorean_c, c)
+    }
+  }
+}
+
+req_triplet_a <- pythogorean_a[pythogorean_a + pythogorean_b + pythogorean_c == 1000]
+req_triplet_b <- pythogorean_b[pythogorean_a + pythogorean_b + pythogorean_c == 1000]
+req_triplet_c <- pythogorean_c[pythogorean_a + pythogorean_b + pythogorean_c == 1000]
+
+req_triplet_a*req_triplet_b*req_triplet_c
+
+
 
