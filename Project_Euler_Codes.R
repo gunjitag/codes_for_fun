@@ -229,35 +229,17 @@ diff <- square_of_sum - sum_of_squares
 #Clear the environment 
 rm(list = ls())
 
-#Make a function to print all the prime numbers of a number
+#Write a function to check whether a number is prime
 
-primefac <- function(x) {
-  #Step 1: Keep dividing by 2 until the number is divisible by 2
-  prime_factors <- c()
-  while(x %% 2 == 0) {
-    prime_factors <- c(prime_factors, 2)
-    x = x/2
-  } 
-  #Start dividing by numbers from 3 to square root of n, and increment by 2
-    i <- 3
-    while(i <= sqrt(x)) {
-      while (x %%i == 0) {
-        prime_factors <- c(prime_factors,i)
-        x = x/i
-      }
-      i = i+2
-    }
-  #Now if the remainder is more than 2, the number is prime
-  prime_factors   <- if (x > 2) c(prime_factors, x) else prime_factors
-  
-  prime_factors
-  
-} 
-
-#Make a function to identify prime nums
 is_prime <- function(x) {
-  is_prime_print <- if(primefac(x) == x) 1 else 0
-  is_prime_print
+  smallest_primefac <- if(x %% 2 == 0) 2 else 0
+  i <- 3
+  while(smallest_primefac == 0 & i <= sqrt(x)) {
+    smallest_primefac <- if(x %% i == 0) i else 0
+    i = i+2
+  }
+  output <- if(smallest_primefac == 0) 1 else if(x == 2) 1 else 0
+  output
 }
 
 #Store prime numbers in a vector
@@ -402,6 +384,30 @@ req_triplet_a*req_triplet_b*req_triplet_c
 #Clear the environment 
 rm(list = ls())
 
+#Write a function to check whether a number is prime
+
+is_prime <- function(x) {
+  smallest_primefac <- if(x %% 2 == 0) 2 else 0
+  i <- 3
+  while(smallest_primefac == 0 & i <= sqrt(x)) {
+    smallest_primefac <- if(x %% i == 0) i else 0
+    i = i+2
+  }
+  output <- if(smallest_primefac == 0) x else if(x == 2) x else 0
+  output
+}
 
 
+#Check the odd numbers from 3 to 2 million
+req_seq <- seq(3,2000000, 2)
 
+start_time <- Sys.time()
+
+#Sum all the prime numbers and add 2
+sum(sapply(req_seq, is_prime)) + 2
+
+end_time <- Sys.time()
+
+time_taken <- end_time - start_time
+
+##Takes a bit of time but does the job
