@@ -162,4 +162,32 @@ while(year < 2001) {
 length(dow[dow == 7])
 
 
+####################################################################################################
+# Problem 20: Factorial digit sum
+# n! means n ?? (n ??? 1) ?? ... ?? 3 ?? 2 ?? 1
+# For example, 10! = 10 ?? 9 ?? ... ?? 3 ?? 2 ?? 1 = 3628800,
+# and the sum of the digits in the number 10! is 3 + 6 + 2 + 8 + 8 + 0 + 0 = 27.
+# Find the sum of the digits in the number 100!
+####################################################################################################
+
+#Clear the environment 
+rm(list= ls())
+
+#Load a package that makes things easier
+library(gmp)
+
+#Get factorial of 99 - use as.bigz to not lose precision
+num <- as.bigz(99)
+factorial_num <- factorial(num)
+
+#R cannot perform mathematical operations on such a big number, so I convert it to a string
+num_fac_char <- toString(factorial_num)
+
+#Split the string, store in a vector, convert individual component to the numbers
+vec_num_components <- as.numeric(unlist(strsplit(num_fac_char, "")))
+
+#Sum of numbers
+sum(vec_num_components)
+
+
 
