@@ -21,6 +21,8 @@ upper_limit <- 999
 
 #Find all numbers that are multiples of 3 and 5 below the upper limit and add them to make the required sum
 
+
+
 #Method 1: MAKE A FUNCTION AND APPLY IT TO THE VECTOR
 #Write a function that returns number if divisible by 3 or 5 and 0 otherwise
 multiple_3or5 <- function(x){
@@ -35,6 +37,9 @@ sum(sapply(seq(1:upper_limit), multiple_3or5))
 #Method 2: DIRECTLY APPLY THE CONDITION
 seq <- seq(1:upper_limit)
 sum(seq[seq %% 3 == 0 | seq %% 5 == 0])
+
+
+
 
 ###################################################################################################
 #Problem 2: Even Fibbonacci Numbers
@@ -75,6 +80,45 @@ sum(sapply(fibbonaci_seq,multiple_q,y=2))
 #Way to do it without the function
 sum(fibbonaci_seq[fibbonaci_seq %% 2 == 0])
 
+####################################################################################################
+# The prime factors of 13195 are 5, 7, 13 and 29.
+# What is the largest prime factor of the number 600851475143?
+####################################################################################################
+
+#Clear the environment 
+rm(list= ls())
+
+num <- 600851475143
+
+#Clear the environment 
+rm(list = ls())
+
+#Make a function to print all the prime numbers of a number
+
+primefac <- function(x) {
+  #Step 1: Keep dividing by 2 until the number is divisible by 2
+  prime_factors <- c()
+  while(x %% 2 == 0) {
+    prime_factors <- c(prime_factors, 2)
+    x = x/2
+  } 
+  #Start dividing by numbers from 3 to square root of n, and increment by 2
+  i <- 3
+  while(i <= sqrt(x)) {
+    while (x %%i == 0) {
+      prime_factors <- c(prime_factors,i)
+      x = x/i
+    }
+    i = i+2
+  }
+  #Now if the remainder is more than 2, the number is prime
+  prime_factors   <- if (x > 2) c(prime_factors, x) else prime_factors
+  
+  prime_factors
+  
+} 
+
+max(primefac(num))
 
 
 ####################################################################################################
@@ -84,7 +128,7 @@ sum(fibbonaci_seq[fibbonaci_seq %% 2 == 0])
 ####################################################################################################
 
 #Clear the environment 
-rm(list = ls())
+rm(list= ls())
 
 #Write a fuction that reverses a number and checks Palindrome 
 return_palindomes <- function(x) {
@@ -177,7 +221,123 @@ diff <- square_of_sum - sum_of_squares
 
 
 ####################################################################################################
-# Problem 7: Special Pythogorean Triplet
+# Problem 7: 10001st prime
+# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13
+# we can see that the 6th prime is 13.
+# What is the 10001st prime number?
+####################################################################################################
+#Clear the environment 
+rm(list = ls())
+
+#Write a function to check whether a number is prime
+
+is_prime <- function(x) {
+  smallest_primefac <- if(x %% 2 == 0) 2 else 0
+  i <- 3
+  while(smallest_primefac == 0 & i <= sqrt(x)) {
+    smallest_primefac <- if(x %% i == 0) i else 0
+    i = i+2
+  }
+  output <- if(smallest_primefac == 0) 1 else if(x == 2) 1 else 0
+  output
+}
+
+#Store prime numbers in a vector
+prime_num <- c(2)
+
+# Put in the starting point
+i <- 3
+
+while(length(prime_num) < 10001) {
+  prime_num <- if(is_prime(i)== 1) c(prime_num, i) else prime_num
+  i = i+2
+}
+
+length(prime_num)
+
+max(prime_num)
+
+
+####################################################################################################
+# Problem 8: Largest Product in a Series
+# The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
+# 
+# 73167176531330624919225119674426574742355349194934
+# 96983520312774506326239578318016984801869478851843
+# 85861560789112949495459501737958331952853208805511
+# 12540698747158523863050715693290963295227443043557
+# 66896648950445244523161731856403098711121722383113
+# 62229893423380308135336276614282806444486645238749
+# 30358907296290491560440772390713810515859307960866
+# 70172427121883998797908792274921901699720888093776
+# 65727333001053367881220235421809751254540594752243
+# 52584907711670556013604839586446706324415722155397
+# 53697817977846174064955149290862569321978468622482
+# 83972241375657056057490261407972968652414535100474
+# 82166370484403199890008895243450658541227588666881
+# 16427171479924442928230863465674813919123162824586
+# 17866458359124566529476545682848912883142607690042
+# 24219022671055626321111109370544217506941658960408
+# 07198403850962455444362981230987879927244284909188
+# 84580156166097919133875499200524063689912560717606
+# 05886116467109405077541002256983155200055935729725
+# 71636269561882670428252483600823257530420752963450
+# 
+# Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+####################################################################################################
+
+#Clear the environment 
+rm(list = ls())
+
+#Input the number as a string as R cannot handle this big a number
+num = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450"
+
+#Since any string containing 0 cannot be the largest product, split at 0
+subseq_num <- unlist(strsplit(num, "0"))
+
+#Only check the sequences that are longer than 13
+subseq_num <- subseq_num[nchar(subseq_num) >= 13]
+
+#Write a function that calculates the product of each 13 digit sub sequence of a number
+product_13 <- function(x) {
+  #Parameters of the while loop
+  #Start from the 1st digit
+  i = 1
+  #Go until the last character
+  x_n <- nchar(x)
+  #Store the product of each 13 digit sequence in the following vector
+  product_seq <- c()
+  
+  while(i + 12 <= x_n) {
+    req_num <- as.numeric(substr(x, i, i+12))
+    #Make parameters for the next while loop
+    product_req_num <- 1
+    while(req_num>=1) {
+      last_dig <- req_num %% 10
+      product_req_num <- product_req_num*last_dig
+      req_num = floor(req_num/10)
+    }
+    product_req_num
+    product_seq <- c(product_seq, product_req_num)
+    product_seq
+    i= i+ 1
+  }
+  product_seq
+}
+
+#Write a function that calculates the maximum product of each 13 digit sub sequence of a number
+max_product13 <- function(x){
+  max(product_13(x))
+}
+
+#Apply to the substrings required and find the max
+max(sapply(subseq_num, max_product13))
+
+
+
+
+####################################################################################################
+# Problem 9: Special Pythogorean Triplet
 # A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
 # a^2 + b^2 = c^2
 # For example, 3^2 + 4^2 = 9 + 16 = 25 = 5^2.
@@ -215,4 +375,39 @@ req_triplet_c <- pythogorean_c[pythogorean_a + pythogorean_b + pythogorean_c == 
 req_triplet_a*req_triplet_b*req_triplet_c
 
 
+####################################################################################################
+# Problem 10: Summation of primes
+# The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+# Find the sum of all the primes below two million.
+####################################################################################################
 
+#Clear the environment 
+rm(list = ls())
+
+#Write a function to check whether a number is prime
+
+is_prime <- function(x) {
+  smallest_primefac <- if(x %% 2 == 0) 2 else 0
+  i <- 3
+  while(smallest_primefac == 0 & i <= sqrt(x)) {
+    smallest_primefac <- if(x %% i == 0) i else 0
+    i = i+2
+  }
+  output <- if(smallest_primefac == 0) x else if(x == 2) x else 0
+  output
+}
+
+
+#Check the odd numbers from 3 to 2 million
+req_seq <- seq(3,2000000, 2)
+
+start_time <- Sys.time()
+
+#Sum all the prime numbers and add 2
+sum(sapply(req_seq, is_prime)) + 2
+
+end_time <- Sys.time()
+
+time_taken <- end_time - start_time
+
+##Takes a bit of time but does the job
