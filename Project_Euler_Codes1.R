@@ -81,6 +81,7 @@ sum(sapply(fibbonaci_seq,multiple_q,y=2))
 sum(fibbonaci_seq[fibbonaci_seq %% 2 == 0])
 
 ####################################################################################################
+#Problem 3: Largest Prime Factor
 # The prime factors of 13195 are 5, 7, 13 and 29.
 # What is the largest prime factor of the number 600851475143?
 ####################################################################################################
@@ -260,7 +261,7 @@ max(prime_num)
 
 ####################################################################################################
 # Problem 8: Largest Product in a Series
-# The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
+# The four adjacent digits in the 1000-digit number that have the greatest product are 9 ? 9 ? 8 ? 9 = 5832.
 # 
 # 73167176531330624919225119674426574742355349194934
 # 96983520312774506326239578318016984801869478851843
