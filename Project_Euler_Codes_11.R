@@ -80,26 +80,26 @@ for(j in 1:20){
 max_product_vertical <- max(product_vertical)
 
 
-#Forward Diagnal product
-product_diagnal <- c()
+#Forward Diagonal product
+product_diagonal <- c()
 for(j in 1:17){
   for(i in 1:17){
-    product_diagnal <- c(product_diagnal, M[i,j]*M[i+1,j+1]*M[i+2,j+2]*M[i+3,j+3])
+    product_diagonal <- c(product_diagonal, M[i,j]*M[i+1,j+1]*M[i+2,j+2]*M[i+3,j+3])
   }
 }
-max_product_diagnal <- max(product_diagnal)
+max_product_diagonal <- max(product_diagonal)
 
 
 #Backward Diagnal product
-product_diagnal2 <- c()
+product_diagonal2 <- c()
 for(i in 1:17){
   for(j in 4:20){
-    product_diagnal2 <- c(product_diagnal2, M[i,j]*M[i+1,j-1]*M[i+2,j-2]*M[i+3,j-3])
+    product_diagonal2 <- c(product_diagonal2, M[i,j]*M[i+1,j-1]*M[i+2,j-2]*M[i+3,j-3])
   }
 }
-max_product_diagnal2 <- max(product_diagnal2)
+max_product_diagonal2 <- max(product_diagonal2)
 
-max_product <- max(max_product_diagnal2, max_product_diagnal, max_product_vertical, max_product_horizontal)
+max_product <- max(max_product_diagonal2, max_product_diagonal, max_product_vertical, max_product_horizontal)
 
 
 ####################################################################################################
